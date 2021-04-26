@@ -35,53 +35,62 @@ void drawRoom(int x, int y, int exitX, int exitY, int highBoundX, int highBoundY
 
 int main() {
 	int lowBoundX = 1, lowBoundY = 1;
-	int highBoundX = 10, highBoundY = 10;
-	int x = 1, y = 1;
-	int exitX, exitY;
-
-	cout << "Where should we put the exit?" << endl;
-	cout << "Enter a number between 1 and 10, inclusive: ";
-	cin >> exitX;
-	cout << "Enter a number between 1 and 10, inclusive: ";
-	cin >> exitY;
-	cout << "You chose: " << exitX << ", " << exitY << endl;
-
-	drawRoom(x, y, exitX, exitY, highBoundX, highBoundY);
-
+	int highBoundX = 25, highBoundY = 25;
 	int c = 0;
-	while (!(x == exitX && y == exitY)) {
-		if (kbhit()) {  // if a key is pressed
-			_getch();
-			switch((c=_getch())) {  // get the key stroke
-			case KEY_UP:
-				if (y < highBoundY) {
-					y++;
+	char again;
+	
+	while(1) {
+		int x = 1, y = 1;
+		int exitX = 0, exitY = 0;
+
+		cout << "Where should we put the exit?" << endl;
+		cout << "Enter a number between 1 and " << highBoundX << ", inclusive: ";
+		cin >> exitX;
+		cout << "Enter a number between 1 and " << highBoundY << ", inclusive: ";
+		cin >> exitY;
+		cout << "You chose: " << exitX << ", " << exitY << endl;
+
+		drawRoom(x, y, exitX, exitY, highBoundX, highBoundY);
+
+		while (!(x == exitX && y == exitY)) {
+			if (kbhit()) {  // if a key is pressed
+				_getch();
+				switch((c = _getch())) {  // get the key stroke
+				case KEY_UP:
+					if (y < highBoundY) {
+						y++;
+					}
+					drawRoom(x,y,exitX,exitY,highBoundX,highBoundY);
+					break;
+				case KEY_DOWN:
+					if (y > lowBoundY) {
+						y--;
+					}
+					drawRoom(x,y,exitX,exitY,highBoundX,highBoundY);
+					break;
+				case KEY_LEFT:
+					if (x > lowBoundX) {
+						x--;
+					}
+					drawRoom(x,y,exitX,exitY,highBoundX,highBoundY);
+					break;
+				case KEY_RIGHT:
+					if (x < highBoundX) {
+						x++;
+					}
+					drawRoom(x,y,exitX,exitY,highBoundX,highBoundY);
+					break;
+				default:
+					cout << "" << endl;  // we basically ignore any non-arrow key hits here
 				}
-				drawRoom(x,y,exitX,exitY,highBoundX,highBoundY);
-				break;
-			case KEY_DOWN:
-				if (y > lowBoundY) {
-					y--;
-				}
-				drawRoom(x,y,exitX,exitY,highBoundX,highBoundY);
-				break;
-			case KEY_LEFT:
-				if (x > lowBoundX) {
-					x--;
-				}
-				drawRoom(x,y,exitX,exitY,highBoundX,highBoundY);
-				break;
-			case KEY_RIGHT:
-				if (x < highBoundX) {
-					x++;
-				}
-				drawRoom(x,y,exitX,exitY,highBoundX,highBoundY);
-				break;
-			default:
-				cout << "" << endl;  // we basically ignore any non-arrow key hits here
 			}
 		}
-	}
 
+		cout << "You made it!" << endl << "Play again? (y/n): ";
+		cin >> again;
+		if (again == 'n') {
+			break;
+		}
+	}
 	return 0;
 }

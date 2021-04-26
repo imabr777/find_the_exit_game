@@ -4,9 +4,9 @@ By Abraham Im
 ## Description
 This is a simple little C++ game where you play as the little @ symbol, and you have to move him to the exit, marked by the O. Somewhat reminiscent of Snake, only the game ends once you hit the goal.
 
-The game first asks where it should place the exit, between ints 1 and 10 (it doesn't check whether the input is in the bounds). After the player inputs the coordinates, it draws the board and waits for the arrow keys to be pressed.
+The game first asks where it should place the exit, between ints 1 and 25 (it doesn't check whether the input is in the bounds). After the player inputs the coordinates, it draws the board and waits for the arrow keys to be pressed.
 
-The game exits when the @ symbol reaches the O exit.
+The game is won when the @ symbol reaches the O exit. At this point, the game asks the player if they want to play again.
 
 It does keep track of the @'s position and stops it when it reaches the boundaries.
 
